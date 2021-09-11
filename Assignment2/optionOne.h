@@ -87,8 +87,9 @@ void readData(std::vector<Employee>& obj)
 
     }
 
+    // This could possibly be done in the above while loop.
     // will clean this up later
-    if (fileData.size() % 6 != 0) std::cout << "mismatch data" << std::endl; // if data in file is incomplete. primitive 
+    if (fileData.size() % 6 != 0) std::cout << "mismatch data" << std::endl;
     else
     {
         for (int i = 0; i < fileData.size(); i++)
