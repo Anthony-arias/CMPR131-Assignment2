@@ -33,3 +33,17 @@ void displayOptionOneMenu(void)
     cout << "\t\t0> return" << endl;
     cout << "\t" + string(85, char(205)) << endl;
 }
+
+//PreCondition: NA
+//PostCondition: displays option one sub menu options
+void displayOptionOneSubMenu(void)
+{
+    cout << "\n\t\tDisplay Employee Record Information" << endl;
+    cout << "\t\t" + string(85, char(205)) << endl;
+    cout << "\t\t\tA> All records" << endl;
+    cout << "\t\t\tB> Active records" << endl;
+    cout << "\t\t\tC> Inactive records" << endl;
+    cout << "\t\t" + string(85, char(196)) << endl;
+    cout << "\t\t\t0> return" << endl;
+    cout << "\t\t" + string(85, char(205)) << endl;
+}

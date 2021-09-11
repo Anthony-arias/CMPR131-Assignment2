@@ -2,10 +2,13 @@
 
 #include "menus.h"
 #include "input.h"
+#include "optionOne.h"
+#include "Employee.h"
 
 void mainMenu(void);
 void programOne(void);
 void programTwo(void);
+void programOneSubProgram(std::vector<Employee> employees);
 
 int main(void)
 {
@@ -37,7 +40,7 @@ void mainMenu(void)
 void programOne(void)
 {
     displayOptionOneMenu();
-
+    std::vector<Employee> employees;
     do
     {
         int option = inputChar("\t\tOption: ");
@@ -45,13 +48,32 @@ void programOne(void)
         switch (option)
         {
         case '0': mainMenu(); break;
-        case 'a': case 'A': /*function here*/; displayOptionOneMenu(); break;
+        case 'a': case 'A': readData(employees); displayOptionOneMenu(); break;
         case 'b': case 'B': /*function here*/; displayOptionOneMenu(); break;
         case 'c': case 'C': /*function here*/; displayOptionOneMenu(); break;
-        case 'd': case 'D': /*function here*/; displayOptionOneMenu(); break;
+        case 'd': case 'D': programOneSubProgram(employees); displayOptionOneMenu(); break;
         case 'e': case 'E': /*function here*/; displayOptionOneMenu(); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
                  displayOptionOneMenu(); continue;
+        }
+    } while (true);
+}
+
+void programOneSubProgram(std::vector<Employee> employees)
+{
+    displayOptionOneSubMenu();
+    do
+    {
+        int option = inputChar("\t\t\tOption: ");
+
+        switch (option)
+        {
+        case '0': programOne(); break;
+        case 'a': case 'A': displayAllRecords(employees); displayOptionOneSubMenu(); break;
+        case 'b': case 'B': displayAllActiveRecords(employees); displayOptionOneSubMenu(); break;
+        case 'c': case 'C': displayAllInactiveRecords(employees); displayOptionOneSubMenu(); break;
+        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
+            displayOptionOneMenu(); continue;
         }
     } while (true);
 }
