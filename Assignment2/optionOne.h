@@ -1,0 +1,132 @@
+// optionOne.h
+
+#ifndef OPTION_ONE_LOCK
+#define OPTION_ONE_LOCK
+
+#include "Employee.h"
+#include "input.h"
+
+#include<sstream>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cctype>
+
+//void listOfEmployees();
+//void displayOptionOneMenu(void);
+/*
+void readData(std::vector<Employee> obj)
+{
+    system("CLS");
+
+    obj.clear();
+
+    std::ifstream source;
+    while (true)
+    {
+        string s;
+        source.open(inputString("Enter the file name: ", true));
+        if (!source.fail()) break;
+        std::cout << "open failed, try again" << std::endl;
+        source.clear();
+    }
+
+    while (true)
+    {
+        std::string line;
+        std::getline(source, line);
+        if (source.fail()) break; // not "failure", just end of file
+
+        std::stringstream line1(line);
+        std::string segment;
+        std::vector<std::string> employeeInformation;
+
+        while (std::getline(line1, segment, '_'))
+        {
+            employeeInformation.push_back(segment);
+        }
+
+        obj.push_back(Employee(employeeInformation.at(0), employeeInformation.at(1),
+            employeeInformation.at(2), employeeInformation.at(3),
+            employeeInformation.at(4), employeeInformation.at(5)));
+
+
+    }
+}*/
+
+void readData(std::vector<Employee> obj)
+{
+    //system("CLS");
+
+    obj.clear();
+
+    std::vector<string> fileData;
+
+    std::ifstream source;
+    while (true)
+    {
+        string s;
+        source.open(inputString("\n\t\tEnter the file name: ", true));
+        if (!source.fail()) break;
+        std::cout << "open failed, try again" << std::endl;
+        source.clear();
+    }
+
+    while (true)
+    {
+        std::string line;
+        std::getline(source, line);
+        if (source.fail()) break; // not "failure", just end of file
+
+        std::stringstream stream(line);
+        while (stream.good()) {
+            string substr;
+            getline(stream, substr, ',');
+            fileData.push_back(substr);
+        }
+
+    }
+
+    if (fileData.size() % 6 != 0) std::cout << "missmatch data" << std::endl;
+    else
+    {
+        for (int i = 0; i < fileData.size(); i++)
+        {
+            if (i % 6 == 0 && fileData.size() != i + 1 || i == 0)
+            {
+                Employee employee;
+                employee.setStatus(fileData.at(i));
+                employee.setEmployeeNumber(fileData.at(i + 1));
+                employee.setLastName(fileData.at(i + 2));
+                employee.setFirstName(fileData.at(i + 3));
+                employee.setStartDate(fileData.at(i + 4));
+                employee.setEndDate(fileData.at(i + 5));
+
+                obj.push_back(employee);
+            }
+        }
+    }
+
+    
+}
+
+//void insertEmployee(std::vector<Employee> obj);
+//void updateRecord(std::vector<Employee> obj);
+void displayAllRecords(std::vector<Employee> obj)
+{
+    for (int i = 0; i < obj.size(); i++)
+    {
+        std::cout << "Employee ID   : " << obj[i].getEmployeeNumber() << std::endl;
+        std::cout << "Name          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+        std::cout << "Status        : " << obj[i].getStatus() << std::endl;
+        std::cout << "Start Date    : " << obj[i].getStartDate() << std::endl;
+        std::cout << "End Date      : " << obj[i].getEndDate() << std::endl;
+        std::cout << std::endl;
+    }
+
+
+}
+//void writeToFile(std::vector<Employee> obj);
+
+
+#endif
