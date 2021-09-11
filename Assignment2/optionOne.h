@@ -12,6 +12,8 @@
 #include <vector>
 #include <cctype>
 
+void displayAllRecords(std::vector<Employee> obj);
+
 //void listOfEmployees();
 //void displayOptionOneMenu(void);
 /*
@@ -54,10 +56,8 @@ void readData(std::vector<Employee> obj)
     }
 }*/
 
-void readData(std::vector<Employee> obj)
+void readData(std::vector<Employee>& obj)
 {
-    //system("CLS");
-
     obj.clear();
 
     std::vector<string> fileData;
@@ -87,7 +87,8 @@ void readData(std::vector<Employee> obj)
 
     }
 
-    if (fileData.size() % 6 != 0) std::cout << "missmatch data" << std::endl;
+    // will clean this up later
+    if (fileData.size() % 6 != 0) std::cout << "mismatch data" << std::endl; // if data in file is incomplete. primitive 
     else
     {
         for (int i = 0; i < fileData.size(); i++)
@@ -105,6 +106,7 @@ void readData(std::vector<Employee> obj)
                 obj.push_back(employee);
             }
         }
+        std::cout << "\n\t\tCompleted transfering data from file to list." << std::endl;
     }
 
     
@@ -112,20 +114,80 @@ void readData(std::vector<Employee> obj)
 
 //void insertEmployee(std::vector<Employee> obj);
 //void updateRecord(std::vector<Employee> obj);
+
 void displayAllRecords(std::vector<Employee> obj)
 {
+    if (obj.size() == 0)
+    {
+        std::cout << "\n\t\tNo record found." << std::endl;
+        return;
+    }
+
     for (int i = 0; i < obj.size(); i++)
     {
-        std::cout << "Employee ID   : " << obj[i].getEmployeeNumber() << std::endl;
-        std::cout << "Name          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
-        std::cout << "Status        : " << obj[i].getStatus() << std::endl;
-        std::cout << "Start Date    : " << obj[i].getStartDate() << std::endl;
-        std::cout << "End Date      : " << obj[i].getEndDate() << std::endl;
+        std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
+        std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+        std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
+        std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
+        std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
         std::cout << std::endl;
     }
 
 
 }
+
+void displayAllActiveRecords(std::vector<Employee> obj)
+{
+    std::vector<Employee> temp;
+    for (int i = 0; i < obj.size(); i++)
+    {
+        if (obj[i].getStatus() == 'A') temp.push_back(obj[i]);
+    }
+
+    if (temp.size() == 0)
+    {
+        std::cout << "\n\t\tNo record found." << std::endl;
+        return;
+    }
+    for (int i = 0; i < temp.size(); i++)
+    {
+        std::cout << "\n\t\tEmployee ID   : " << temp[i].getEmployeeNumber() << std::endl;
+        std::cout << "\t\tName          : " << temp[i].getLastName() + ", " + temp[i].getFirstName() << std::endl;
+        std::cout << "\t\tStatus        : " << temp[i].getStatus() << std::endl;
+        std::cout << "\t\tStart Date    : " << temp[i].getStartDate() << std::endl;
+        std::cout << "\t\tEnd Date      : " << temp[i].getEndDate();
+        std::cout << std::endl;
+    }
+
+
+}
+
+void displayAllInactiveRecords(std::vector<Employee> obj)
+{
+    std::vector<Employee> temp;
+    for (int i = 0; i < obj.size(); i++)
+    {
+        if (obj[i].getStatus() == 'I') temp.push_back(obj[i]);
+    }
+
+    if (temp.size() == 0)
+    {
+        std::cout << "\n\t\tNo record found." << std::endl;
+        return;
+    }
+    for (int i = 0; i < temp.size(); i++)
+    {
+        std::cout << "\n\t\tEmployee ID   : " << temp[i].getEmployeeNumber() << std::endl;
+        std::cout << "\t\tName          : " << temp[i].getLastName() + ", " + temp[i].getFirstName() << std::endl;
+        std::cout << "\t\tStatus        : " << temp[i].getStatus() << std::endl;
+        std::cout << "\t\tStart Date    : " << temp[i].getStartDate() << std::endl;
+        std::cout << "\t\tEnd Date      : " << temp[i].getEndDate();
+        std::cout << std::endl;
+    }
+
+
+}
+
 //void writeToFile(std::vector<Employee> obj);
 
 

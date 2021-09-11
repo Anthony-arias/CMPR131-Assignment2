@@ -124,10 +124,11 @@ bool Employee::dateValidation(std::string date)
 // Postcondition: status is set to sts
 void Employee::setStatus(std::string sts)
 {
-	if (std::tolower(sts[0]) == 'u' || std::tolower(sts[0]) == 'i' || std::tolower(sts[0] == 'a'))
+	/*if (std::tolower(sts[0]) == 'u' || std::tolower(sts[0]) == 'i' || std::tolower(sts[0] == 'a'))
 		status = toupper(sts[0]);
 	else
-		status = 'U';
+		status = 'U';*/                                                                              //commented this out to test displayAllActiveRecords();
+	status = sts[0];
 }
 
 // Precondition: none
