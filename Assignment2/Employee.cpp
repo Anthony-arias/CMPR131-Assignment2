@@ -5,6 +5,11 @@
 //	- it appears to be an issue with ObjectCount but I can't quite figure it out as of now
 //
 // September 10, 2021
+//	- ISsues with objectCount ~ due to us using temporary objects sometimes for our functions after the destructor is met it subtracts one from ObjectCount
+//		and so if we add a new employee we are not getting the corrent number.
+//	- Bugs:
+//		- found a bug with the menu when displaying all records. If you enter 1 the main menu is displayed but if a-c is entered it goes into that
+//			choice as if it were in the correct menu.
 
 
 #include "Employee.h"
@@ -36,11 +41,38 @@ Employee::Employee(std::string sts, std::string id, std::string lstNme, std::str
 	setEndDate(endDte);
 
 	objectCount++;
+}
 
+Employee::Employee(std::string lstNme, std::string frstName, std::string strtDate)
+{
+	setStatus("A");
+	setEmployeeNumber();
+	setLastName(lstNme);
+	setFirstName(frstName);
+	setStartDate(strtDate);
+	setEndDate(true);
+
+	objectCount++;
+}
+
+// Precondition: isTemp can be either true or false
+// Postcondition: creates an object but does not add to objectCount within Employee class
+Employee::Employee(bool isTemp)
+{
+	isTemporary = true;
+
+	setStatus("A");
+	setLastName("Unknown");
+	setFirstName("Unknown");
+	setStartDate("01/02/1900"); // Default start date to start of company date.
+	setEndDate(true);
 }
 
 Employee::~Employee()
 {
+	if (isTemporary)
+		return;
+
 	objectCount--;
 }
 
@@ -152,7 +184,7 @@ bool Employee::setStartDate(std::string date)
 	if (date.length() == 0)
 		return false;
 
-	if (!dateValidation(date))
+	if (dateValidation(date))
 	{
 		startDate = date;
 		return true;
@@ -168,7 +200,7 @@ bool Employee::setEndDate(std::string date)
 	if (date.length() == 0)
 		return false;
 
-	if (!dateValidation(date))
+	if (dateValidation(date))
 	{
 		endDate = date;
 		return true;
