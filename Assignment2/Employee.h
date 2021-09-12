@@ -19,6 +19,8 @@ private:
 	std::string startDate;
 	std::string endDate;
 
+	bool isTemporary; // used for new constructor to check if object is made is temporary or not
+
 	void setEmployeeNumber();
 
 	bool isLeap(int year);
@@ -30,6 +32,8 @@ public:
 
 	Employee();
 	Employee(std::string sts, std::string id, std::string lstNme, std::string frstNme, std::string strtDte, std::string endDte);
+	Employee(std::string lstNme, std::string frstName, std::string strtDate);
+	Employee(bool isTemp);
 	~Employee();
 
 	void setStatus(std::string sts);
