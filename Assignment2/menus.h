@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "Employee.h"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ void displayOptionOneMenu(void)
 
 //PreCondition: NA
 //PostCondition: displays option one sub menu options
-void displayOptionOneSubMenu(void)
+void displayOptionOneSubMenuOne(void)
 {
     cout << "\n\t\tDisplay Employee Record Information" << endl;
     cout << "\t\t" + string(85, char(205)) << endl;
@@ -45,5 +46,23 @@ void displayOptionOneSubMenu(void)
     cout << "\t\t\tC> Inactive records" << endl;
     cout << "\t\t" + string(85, char(196)) << endl;
     cout << "\t\t\t0> return" << endl;
+    cout << "\t\t" + string(85, char(205)) << endl;
+}
+
+//PreCondition: NA
+//PostCondition: displays option one sub menu options
+void displayOptionOneSubMenuTwo(Employee thisEmployee)
+{
+    
+    cout << "\n\t\tUpdate Employee ID: 1 Record Information" << endl;
+    cout << "\t\t" + string(85, char(205)) << endl;
+    cout << "\t\t\tA> Current status       : " << thisEmployee.getStatus() << endl;
+    cout << "\t\t\tB> Current last name    : " << thisEmployee.getLastName() << endl;
+    cout << "\t\t\tC> Current first name   : " << thisEmployee.getFirstName() << endl;
+    cout << "\t\t\tD> Current Starting date: " << thisEmployee.getStartDate() << endl;
+    cout << "\t\t\tE> Current Ending date  : " << thisEmployee.getEndDate() << endl;
+    cout << "\t\t" + string(85, char(196)) << endl;
+    cout << "\t\t\t1> Commit the change(s) and return" << endl;
+    cout << "\t\t\t0> Uncommit the change(s) and return" << endl;
     cout << "\t\t" + string(85, char(205)) << endl;
 }

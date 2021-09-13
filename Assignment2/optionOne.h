@@ -28,51 +28,12 @@ bool isLeap(int year);
 
 //void listOfEmployees();
 //void displayOptionOneMenu(void);
-/*
-void readData(std::vector<Employee> obj)
-{
-    system("CLS");
-
-    obj.clear();
-
-    std::ifstream source;
-    while (true)
-    {
-        string s;
-        source.open(inputString("Enter the file name: ", true));
-        if (!source.fail()) break;
-        std::cout << "open failed, try again" << std::endl;
-        source.clear();
-    }
-
-    while (true)
-    {
-        std::string line;
-        std::getline(source, line);
-        if (source.fail()) break; // not "failure", just end of file
-
-        std::stringstream line1(line);
-        std::string segment;
-        std::vector<std::string> employeeInformation;
-
-        while (std::getline(line1, segment, '_'))
-        {
-            employeeInformation.push_back(segment);
-        }
-
-        obj.push_back(Employee(employeeInformation.at(0), employeeInformation.at(1),
-            employeeInformation.at(2), employeeInformation.at(3),
-            employeeInformation.at(4), employeeInformation.at(5)));
-
-
-    }
-}*/
 
 void readData(std::vector<Employee>& obj)
 {
     obj.clear();
 
-    std::vector<string> fileData;
+    std::vector<vector<string>> fileData;
 
     std::ifstream source;
     while (true)
@@ -90,43 +51,90 @@ void readData(std::vector<Employee>& obj)
         std::getline(source, line);
         if (source.fail()) break; // not "failure", just end of file
 
+        std::vector<string> fileLine;
         std::stringstream stream(line);
         while (stream.good()) {
             string substr;
             getline(stream, substr, ',');
-            fileData.push_back(substr);
+            if (substr.empty()) break; 
+            fileLine.push_back(substr);
         }
-
+        fileData.push_back(fileLine);
     }
 
-    // This could possibly be done in the above while loop.
-    // will clean this up later
-    if (fileData.size() % 6 != 0) std::cout << "mismatch data" << std::endl;
-    else
+
+    for (int i = 0; i < fileData.size(); i++)
     {
-        for (int i = 0; i < fileData.size(); i++)
-        {
-            if (i % 6 == 0 && fileData.size() != i + 1 || i == 0)
-            {
-                Employee employee;
-                employee.setStatus(fileData.at(i));
-                employee.setEmployeeNumber(fileData.at(i + 1));
-                employee.setLastName(fileData.at(i + 2));
-                employee.setFirstName(fileData.at(i + 3));
-                employee.setStartDate(fileData.at(i + 4));
-                employee.setEndDate(fileData.at(i + 5));
+        if (fileData[i].size() != 6) continue; // if employee data is incomplete skip to next data set
 
-                obj.push_back(employee);
-            }
-        }
-        std::cout << "\n\t\tCompleted transfering data from file to list." << std::endl;
+        Employee employee;
+        employee.setStatus(fileData[i][0]);
+        employee.setEmployeeNumber(fileData[i][1]);
+        employee.setLastName(fileData[i][2]);
+        employee.setFirstName(fileData[i][3]);
+        employee.setStartDate(fileData[i][4]);
+        employee.setEndDate(fileData[i][5]);
+
+        obj.push_back(employee);
     }
-
 
 }
 
 //void insertEmployee(std::vector<Employee> obj);
-//void updateRecord(std::vector<Employee> obj);
+void updateRecord(Employee& thisEmployee, std::string option)
+{
+    if (option == "status")
+    {
+        char input;
+        while (true)
+        {
+            input = inputChar("\n\t\t\tChange status to A-active, I-inactice or U-Unknown status: ");
+            if (input != 'a' || input != 'i' || input != 'u') break;
+        }
+
+        thisEmployee.setStatus(std::string(1, input));
+    }
+    else if (option == "last")
+    {
+        thisEmployee.setLastName(inputString("\n\t\t\tEnter the last name: ", true));
+    }
+    else if (option == "first")
+    {
+        thisEmployee.setFirstName(inputString("\n\t\t\tEnter the new first name: ", true));
+    }
+    else if (option == "start")
+    {
+        string startDate;
+        while (true)
+        {
+            startDate = inputString("\n\t\t\tEnter the start date: ", false);
+            if (!dateValidation(startDate))
+            {
+                std::cout << "\n\t\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
+                continue;
+            }
+
+            break;
+        }
+        thisEmployee.setStartDate(startDate);
+    }
+    else if (option == "end")
+    {
+        string endDate;
+        while (true)
+        {
+            endDate = inputString("\n\t\t\tEnter the new ending date: ", false);
+            if (!dateValidation(endDate))
+            {
+                std::cout << "\n\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
+                continue;
+            }
+
+            break;
+        }
+        thisEmployee.setEndDate(endDate);
+    }
+}
 
 void displayAllRecords(std::vector<Employee> obj)
 {
