@@ -10,7 +10,8 @@
 void mainMenu(void);
 void programOne(std::vector<Employee> employees);
 void programTwo(void);
-void programOneSubProgram(std::vector<Employee> employees);
+void programOneSubProgramOne(std::vector<Employee> employees);
+void programOneSubProgramTwo(std::vector<Employee> employees);
 
 int main(void)
 {
@@ -55,8 +56,8 @@ void programOne(std::vector<Employee> employees)
         case '0': mainMenu(); break;
         case 'a': case 'A': readData(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         case 'b': case 'B': insertEmployee(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
-        case 'c': case 'C': /*function here*/; pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
-        case 'd': case 'D': programOneSubProgram(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
+        case 'c': case 'C': programOneSubProgramTwo(employees);; pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
+        case 'd': case 'D': programOneSubProgramOne(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         case 'e': case 'E': /*function here*/; pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
             displayOptionOneMenu(); continue;
@@ -65,10 +66,10 @@ void programOne(std::vector<Employee> employees)
     } while (true);
 }
 
-void programOneSubProgram(std::vector<Employee> employees)
+void programOneSubProgramOne(std::vector<Employee> employees)
 {
     system("CLS");
-    displayOptionOneSubMenu();
+    displayOptionOneSubMenuOne();
     do
     {
         int option = inputChar("\t\t\tOption: ");
@@ -76,9 +77,50 @@ void programOneSubProgram(std::vector<Employee> employees)
         switch (option)
         {
         case '0': programOne(employees); break;
-        case 'a': case 'A': displayAllRecords(employees); displayOptionOneSubMenu(); break;
-        case 'b': case 'B': displayAllActiveRecords(employees); displayOptionOneSubMenu(); break;
-        case 'c': case 'C': displayAllInactiveRecords(employees); displayOptionOneSubMenu(); break;
+        case 'a': case 'A': displayAllRecords(employees); displayOptionOneSubMenuOne(); break;
+        case 'b': case 'B': displayAllActiveRecords(employees); displayOptionOneSubMenuOne(); break;
+        case 'c': case 'C': displayAllInactiveRecords(employees); displayOptionOneSubMenuOne(); break;
+        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
+            displayOptionOneMenu(); continue;
+        }
+    } while (true);
+}
+
+void programOneSubProgramTwo(std::vector<Employee> employees)
+{
+    system("CLS");
+
+    int employeeListSize = employees.size();
+    string prompt = "\t\t\Enter a valid employee ID (1.." + to_string(employeeListSize) + "):";
+    char employeeId = inputInteger(prompt, 1, employeeListSize);
+
+
+    Employee temp;
+    int employeeIndex = 0;
+    for (int i = 0; i < employees.size(); i++)
+    {
+        if (employees[i].getEmployeeNumber()[0] == to_string(employeeId)[0])
+        {
+            temp = employees[i];
+            employeeIndex = i;
+            break;
+        }
+    }
+
+    displayOptionOneSubMenuTwo(temp);
+
+    do
+    {
+        int option = inputChar("\t\t\tOption: ");
+        switch (option)
+        {
+        case '0': programOne(employees); break;
+        case '1': employees[employeeIndex] = temp; programOne(employees); break;
+        case 'a': case 'A': updateRecord(temp, "status"); displayOptionOneSubMenuTwo(temp); break;
+        case 'b': case 'B': updateRecord(temp, "last"); displayOptionOneSubMenuTwo(temp); break;
+        case 'c': case 'C': updateRecord(temp, "first"); displayOptionOneSubMenuTwo(temp); break;
+        case 'd': case 'D': updateRecord(temp, "start"); displayOptionOneSubMenuTwo(temp); break;
+        case 'e': case 'E': updateRecord(temp, "end"); displayOptionOneSubMenuTwo(temp); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
             displayOptionOneMenu(); continue;
         }
