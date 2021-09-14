@@ -58,7 +58,7 @@ void programOne(std::vector<Employee> employees)
         case 'b': case 'B': insertEmployee(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         case 'c': case 'C': programOneSubProgramTwo(employees);; pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         case 'd': case 'D': programOneSubProgramOne(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
-        case 'e': case 'E': /*function here*/; pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
+        case 'e': case 'E': writeData(employees); pause("\t\tPress enter to continue..."); clearScreen(); displayOptionOneMenu(); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
             displayOptionOneMenu(); continue;
         }
@@ -91,7 +91,7 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
     system("CLS");
 
     int employeeListSize = employees.size();
-    string prompt = "\t\t\Enter a valid employee ID (1.." + to_string(employeeListSize) + "):";
+    string prompt = "\t\t\Enter a valid employee ID (1.." + to_string(employeeListSize) + "): ";
     char employeeId = inputInteger(prompt, 1, employeeListSize);
 
 
