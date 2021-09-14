@@ -18,7 +18,7 @@ void displayAllRecords(std::vector<Employee> obj);
 void displayAllActiveRecords(std::vector<Employee> obj);
 void displayAllInactiveRecords(std::vector<Employee> obj);
 void readData(std::vector<Employee>& obj);
-void readData(std::vector<Employee>& obj);
+void writeData(std::vector<Employee> obj);
 void insertEmployee(std::vector<Employee>& obj);
 
 bool dateValidation(std::string date);
@@ -28,8 +28,6 @@ bool isLeap(int year);
 
 void readData(std::vector<Employee>& obj)
 {
-    obj.clear();
-
     std::vector<vector<string>> fileData;
 
     std::ifstream source;
@@ -59,10 +57,22 @@ void readData(std::vector<Employee>& obj)
         fileData.push_back(fileLine);
     }
 
-
     for (int i = 0; i < fileData.size(); i++)
     {
         if (fileData[i].size() != 6) continue; // if employee data is incomplete skip to next data set
+
+        // wont add data to list if entry with same id is present
+        bool idAlreadyExists = false;
+        for (int y = 0; y < obj.size(); y++)
+        {
+            if ( obj[y].getEmployeeNumber() == fileData[i][1])
+            {
+                idAlreadyExists = true;
+                break;
+            }
+        }
+        
+        if (idAlreadyExists) continue;
 
         Employee employee;
 
@@ -89,6 +99,23 @@ void readData(std::vector<Employee>& obj)
     }
 }
 
+void writeData(std::vector<Employee> obj)
+{
+    std::string fileName = inputString("\n\t\tEnter a file name: ", false);
+    std::ofstream outFile(fileName);
+    if (outFile.is_open())
+    {
+        for (int i = 0; i < obj.size(); i++)
+        {
+            outFile << std::string(1, obj[i].getStatus()) + "," + obj[i].getEmployeeNumber() + "," + obj[i].getLastName()
+                + "," + obj[i].getFirstName() + "," + obj[i].getStartDate() + "," + obj[i].getEndDate() << std::endl;
+        }
+        outFile.close();
+    }
+    else std::cout << "\n\t\tError: File could not be opened" << std::endl;
+
+}
+
 void updateRecord(Employee& thisEmployee, std::string option)
 {
     if (option == "status")
@@ -97,7 +124,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
         while (true)
         {
             input = inputChar("\n\t\t\tChange status to A-active, I-inactive or U-Unknown status: ");
-            if (tolower(input) == 'a' || tolower(input) == 'i' || (input) == 'u')
+            if (tolower(input) == 'a' || tolower(input) == 'i' || tolower(input) == 'u')
             {
                 thisEmployee.setStatus(std::string(1, input));
                 break;
@@ -242,6 +269,7 @@ void insertEmployee(std::vector<Employee>& obj)
 
     Employee temp(lastName, firstName, startDate);
     obj.push_back(temp);
+
 }
 
 bool dateValidation(std::string date)
