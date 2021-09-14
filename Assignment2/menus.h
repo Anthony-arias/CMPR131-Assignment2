@@ -53,7 +53,7 @@ void displayOptionOneSubMenuOne(void)
 //PostCondition: displays option one sub menu options
 void displayOptionOneSubMenuTwo(Employee thisEmployee)
 {
-    
+
     cout << "\n\t\tUpdate Employee ID: 1 Record Information" << endl;
     cout << "\t\t" + string(85, char(205)) << endl;
     cout << "\t\t\tA> Current status       : " << thisEmployee.getStatus() << endl;

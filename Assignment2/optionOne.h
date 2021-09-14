@@ -26,9 +26,6 @@ bool isLeap(int year);
 
 // Function Definitions
 
-//void listOfEmployees();
-//void displayOptionOneMenu(void);
-
 void readData(std::vector<Employee>& obj)
 {
     obj.clear();
@@ -56,7 +53,7 @@ void readData(std::vector<Employee>& obj)
         while (stream.good()) {
             string substr;
             getline(stream, substr, ',');
-            if (substr.empty()) break; 
+            if (substr.empty()) break;
             fileLine.push_back(substr);
         }
         fileData.push_back(fileLine);
@@ -68,19 +65,30 @@ void readData(std::vector<Employee>& obj)
         if (fileData[i].size() != 6) continue; // if employee data is incomplete skip to next data set
 
         Employee employee;
-        employee.setStatus(fileData[i][0]);
+
+        if (fileData[i][0] == "a" || fileData[i][0] == "A" || fileData[i][0] == "i" || fileData[i][0] == "I" || fileData[i][0] == "u" || fileData[i][0] == "U")
+            employee.setStatus(fileData[i][0]);
+        else
+            employee.setStatus("U");
+
         employee.setEmployeeNumber(fileData[i][1]);
         employee.setLastName(fileData[i][2]);
         employee.setFirstName(fileData[i][3]);
-        employee.setStartDate(fileData[i][4]);
-        employee.setEndDate(fileData[i][5]);
+
+        if (!dateValidation(fileData[i][4]) && (fileData[i][4] != "Current" || fileData[i][4] != "current"))
+            employee.setStartDate("01/01/1900");
+        else
+            employee.setStartDate(fileData[i][4]);
+
+        if (!dateValidation(fileData[i][5]) || fileData[i][5] == "current" || fileData[i][5] == "Current")
+            employee.setEndDate(true);
+        else
+            employee.setEndDate(fileData[i][5]);
 
         obj.push_back(employee);
     }
-
 }
 
-//void insertEmployee(std::vector<Employee> obj);
 void updateRecord(Employee& thisEmployee, std::string option)
 {
     if (option == "status")
@@ -88,12 +96,17 @@ void updateRecord(Employee& thisEmployee, std::string option)
         char input;
         while (true)
         {
-            input = inputChar("\n\t\t\tChange status to A-active, I-inactice or U-Unknown status: ");
-            if (input != 'a' || input != 'i' || input != 'u') break;
-        }
+            input = inputChar("\n\t\t\tChange status to A-active, I-inactive or U-Unknown status: ");
+            if (tolower(input) == 'a' || tolower(input) == 'i' || (input) == 'u')
+            {
+                thisEmployee.setStatus(std::string(1, input));
+                break;
+            }
 
-        thisEmployee.setStatus(std::string(1, input));
+            cout << "Only A - Active, I-Inactive, or U-Unkown allowed. try again." << endl;
+        }
     }
+
     else if (option == "last")
     {
         thisEmployee.setLastName(inputString("\n\t\t\tEnter the last name: ", true));
@@ -153,62 +166,59 @@ void displayAllRecords(std::vector<Employee> obj)
         std::cout << "\t\tEnd Date\t: " << obj[i].getEndDate();
         std::cout << std::endl;
     }
-
-
 }
 
 void displayAllActiveRecords(std::vector<Employee> obj)
 {
-    std::vector<Employee> temp(true);
+    int count = 0;
+
     for (int i = 0; i < obj.size(); i++)
     {
-        if (obj[i].getStatus() == 'A') temp.push_back(obj[i]);
+        if (obj[i].getStatus() == 'A' || obj[i].getStatus() == 'a')
+        {
+            std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
+            std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+            std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
+            std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
+            std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
+            std::cout << std::endl;
+
+            count++;
+        }
     }
 
-    if (temp.size() == 0)
+    if (count == 0)
     {
         std::cout << "\n\t\tNo record found." << std::endl;
         return;
     }
-    for (int i = 0; i < temp.size(); i++)
-    {
-        std::cout << "\n\t\tEmployee ID   : " << temp[i].getEmployeeNumber() << std::endl;
-        std::cout << "\t\tName          : " << temp[i].getLastName() + ", " + temp[i].getFirstName() << std::endl;
-        std::cout << "\t\tStatus        : " << temp[i].getStatus() << std::endl;
-        std::cout << "\t\tStart Date    : " << temp[i].getStartDate() << std::endl;
-        std::cout << "\t\tEnd Date      : " << temp[i].getEndDate();
-        std::cout << std::endl;
-    }
-
-
 }
 
 void displayAllInactiveRecords(std::vector<Employee> obj)
 {
-    std::vector<Employee> temp(true);
+    int count = 0;
+
     for (int i = 0; i < obj.size(); i++)
     {
-        if (obj[i].getStatus() == 'I') temp.push_back(obj[i]);
+        if (obj[i].getStatus() == 'U' || obj[i].getStatus() == 'u')
+        {
+            std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
+            std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+            std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
+            std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
+            std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
+            std::cout << std::endl;
+
+            count++;
+        }
     }
 
-    if (temp.size() == 0)
+    if (count == 0)
     {
         std::cout << "\n\t\tNo record found." << std::endl;
         return;
     }
-    for (int i = 0; i < temp.size(); i++)
-    {
-        std::cout << "\n\t\tEmployee ID   : " << temp[i].getEmployeeNumber() << std::endl;
-        std::cout << "\t\tName          : " << temp[i].getLastName() + ", " + temp[i].getFirstName() << std::endl;
-        std::cout << "\t\tStatus        : " << temp[i].getStatus() << std::endl;
-        std::cout << "\t\tStart Date    : " << temp[i].getStartDate() << std::endl;
-        std::cout << "\t\tEnd Date      : " << temp[i].getEndDate();
-        std::cout << std::endl;
-    }
-
 }
-
-//void writeToFile(std::vector<Employee> obj);
 
 void insertEmployee(std::vector<Employee>& obj)
 {
