@@ -36,7 +36,7 @@ void mainMenu(void)
         switch (userInput)
         {
         case 0: clearScreen(); exit(1);  break;
-        case 1: clearScreen(); programOne(employees); employees.erase(employee.begin(), employee.end());  break;
+        case 1: clearScreen(); programOne(employees);  break;
         case 2: clearScreen(); programTwo(); break;
         default: cout << "\tERROR-3A: Invalid input. Must be from 0..2." << endl << endl; break;
         }
