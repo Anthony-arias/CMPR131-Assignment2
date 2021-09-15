@@ -14,12 +14,12 @@
 
 // Function Prototypes
 
-void displayAllRecords(std::vector<Employee> obj);
-void displayAllActiveRecords(std::vector<Employee> obj);
-void displayAllInactiveRecords(std::vector<Employee> obj);
+// this prototype will throw error
+//void displayRecords(std::vector<Employee> obj, char option = NULL);
 void readData(std::vector<Employee>& obj);
 void writeData(std::vector<Employee> obj);
 void insertEmployee(std::vector<Employee>& obj);
+void updateRecord(Employee& thisEmployee, std::string option);
 
 bool dateValidation(std::string date);
 bool isLeap(int year);
@@ -101,6 +101,11 @@ void readData(std::vector<Employee>& obj)
 
 void writeData(std::vector<Employee> obj)
 {
+    if (obj.size() == 0)
+    {
+        std::cout << "\n\t\tERROR: list is empty." << std::endl;
+        return;
+    }
     std::string fileName = inputString("\n\t\tEnter a file name: ", false);
     std::ofstream outFile(fileName);
     if (outFile.is_open())
@@ -130,7 +135,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
                 break;
             }
 
-            cout << "Only A - Active, I-Inactive, or U-Unkown allowed. try again." << endl;
+            cout << "Only A - Active, I-Inactive, or U-Unknown allowed. try again." << endl;
         }
     }
 
@@ -176,74 +181,50 @@ void updateRecord(Employee& thisEmployee, std::string option)
     }
 }
 
-void displayAllRecords(std::vector<Employee> obj)
+void displayRecords(std::vector<Employee> obj, char option = NULL)
 {
     if (obj.size() == 0)
     {
-        std::cout << "\n\t\tNo record found." << std::endl;
+        std::cout << "\n\t\t\tNo record found." << std::endl;
         return;
     }
 
-    for (int i = 0; i < obj.size(); i++)
+    if (option == NULL)
     {
-        std::cout << "\n\t\tEmployee ID\t: " << obj[i].getEmployeeNumber() << std::endl;
-        std::cout << "\t\tName\t\t: " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
-        std::cout << "\t\tStatus\t\t: " << obj[i].getStatus() << std::endl;
-        std::cout << "\t\tStart Date\t: " << obj[i].getStartDate() << std::endl;
-        std::cout << "\t\tEnd Date\t: " << obj[i].getEndDate();
-        std::cout << std::endl;
-    }
-}
-
-void displayAllActiveRecords(std::vector<Employee> obj)
-{
-    int count = 0;
-
-    for (int i = 0; i < obj.size(); i++)
-    {
-        if (obj[i].getStatus() == 'A' || obj[i].getStatus() == 'a')
+        for (int i = 0; i < obj.size(); i++)
         {
-            std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
-            std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
-            std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
-            std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
-            std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
+            std::cout << "\n\t\tEmployee ID\t: " << obj[i].getEmployeeNumber() << std::endl;
+            std::cout << "\t\tName\t\t: " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+            std::cout << "\t\tStatus\t\t: " << obj[i].getStatus() << std::endl;
+            std::cout << "\t\tStart Date\t: " << obj[i].getStartDate() << std::endl;
+            std::cout << "\t\tEnd Date\t: " << obj[i].getEndDate();
             std::cout << std::endl;
-
-            count++;
         }
     }
-
-    if (count == 0)
+    else
     {
-        std::cout << "\n\t\tNo record found." << std::endl;
-        return;
-    }
-}
+        int count = 0;
 
-void displayAllInactiveRecords(std::vector<Employee> obj)
-{
-    int count = 0;
-
-    for (int i = 0; i < obj.size(); i++)
-    {
-        if (obj[i].getStatus() == 'U' || obj[i].getStatus() == 'u')
+        for (int i = 0; i < obj.size(); i++)
         {
-            std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
-            std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
-            std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
-            std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
-            std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
-            std::cout << std::endl;
+            if (obj[i].getStatus() == option || obj[i].getStatus() == tolower(option))
+            {
+                std::cout << "\n\t\tEmployee ID   : " << obj[i].getEmployeeNumber() << std::endl;
+                std::cout << "\t\tName          : " << obj[i].getLastName() + ", " + obj[i].getFirstName() << std::endl;
+                std::cout << "\t\tStatus        : " << obj[i].getStatus() << std::endl;
+                std::cout << "\t\tStart Date    : " << obj[i].getStartDate() << std::endl;
+                std::cout << "\t\tEnd Date      : " << obj[i].getEndDate();
+                std::cout << std::endl;
 
-            count++;
+                count++;
+            }
         }
-    }
 
-    if (count == 0)
-    {
-        std::cout << "\n\t\tNo record found." << std::endl;
-        return;
+        if (count == 0)
+        {
+            std::cout << "\n\t\t\tNo record found." << std::endl;
+            return;
+        }
     }
 }
 
