@@ -112,7 +112,7 @@ bool Employee::isLeap(int year)
 // Postcondition: returns true if the date is entered in correct format, flase if it is not
 bool Employee::dateValidation(std::string date)
 {
-	if (date.length() < 10)
+	if (date.length() < 10 || date.length() > 10)
 		return false;
 
 	if (date[2] != '/' || date[5] != '/')

@@ -255,7 +255,7 @@ void insertEmployee(std::vector<Employee>& obj)
 
 bool dateValidation(std::string date)
 {
-    if (date.length() < 10)
+    if (date.length() < 10 || date.length() > 10)
         return false;
 
     if (date[2] != '/' || date[5] != '/')

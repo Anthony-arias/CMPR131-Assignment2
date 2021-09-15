@@ -24,29 +24,26 @@ int main(void)
 void mainMenu(void)
 {
 
-    std::vector<Employee> employees;
-
-    clearScreen();
-
-    displayMainMenu();
 
     do
     {
+        std::vector<Employee> employees;
+        employees.clear();
+
+        clearScreen();
+
+        displayMainMenu();
+
         int userInput = inputInteger("\t\tOption: ");
         switch (userInput)
         {
-        case 0: clearScreen(); exit(1);  break;
-        case 1: clearScreen(); programOne(employees);  break;
+        case 0: clearScreen(); return;
+        case 1: clearScreen(); programOne(employees); break;
         case 2: clearScreen(); programTwo(); break;
         default: cout << "\tERROR-3A: Invalid input. Must be from 0..2." << endl << endl; break;
         }
-    } while (true);
-}
 
-void temp()
-{
-    std::vector<Employee> employees;
-    programOne(employees);
+    } while (true);
 }
 
 void programOne(std::vector<Employee> employees)
@@ -61,7 +58,7 @@ void programOne(std::vector<Employee> employees)
 
         switch (option)
         {
-        case '0': mainMenu(); break;
+        case '0': return;
         case 'a': case 'A': readData(employees); pause("\n\t\tPress enter to continue..."); break;
         case 'b': case 'B': insertEmployee(employees); pause("\n\tPress enter to continue...");  break;
         case 'c': case 'C': programOneSubProgramTwo(employees); break;
@@ -91,13 +88,16 @@ void programOneSubProgramOne(std::vector<Employee> employees)
 
         switch (option)
         {
-        case '0': programOne(employees); break;
+        case '0': return;
         case 'a': case 'A': displayRecords(employees); pause("\n\t\tPress enter to continue..."); break;
         case 'b': case 'B': displayRecords(employees, 'A'); pause("\n\t\tPress enter to continue..."); break;
         case 'c': case 'C': displayRecords(employees, 'I'); pause("\n\t\tPress enter to continue..."); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
             displayOptionOneMenu(); continue;
         }
+
+        break; 
+
     } while (true);
 }
 
@@ -133,7 +133,7 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
         int option = inputChar("\t\t\tOption: ");
         switch (option)
         {
-        case '0': programOne(employees); break;
+        case '0': return;
         case '1': employees[employeeIndex] = temp; programOne(employees); break;
         case 'a': case 'A': updateRecord(temp, "status"); break;
         case 'b': case 'B': updateRecord(temp, "last"); break;
