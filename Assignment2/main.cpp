@@ -142,5 +142,57 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
 
 void programTwo(void)
 {
-    // stuff here
+    clearScreen();
+	cout << "2> Pseudorandom Project" << endl;
+	cout << string(100, char(196)) << endl;
+    srand(time(0));
+    const int SEED = 1;
+    int multiplier = rand() % 999;
+    int increment = rand() % 999;
+    int modulus = rand() % 999;
+
+//Project 11
+	cout << "\t2> Pseudorandom Project" << endl;
+
+	Pseudorandom object(seed, multiplier, increment, modulus);
+    cout << "\ttest1 (pseudorandom): " << endl;
+    cout << "\t\tSeed " << object.getSeed() << endl;
+    cout << "\t\tGenerated random " << object.getModulus() << " different numbers.\n" << endl;
+	cout << "\tFirst number: \n" << endl;
+    cout << "\t\tmultiplier = " << object.getMultiplier() << 
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() << 
+        ", and the new seed = " << object.returnNextNumber() << "\n" << endl;
+    //next number
+    cout << "\tNext number: \n" << endl;
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new seed = " << object.returnNextNumber() << "\n" << endl;
+    //next number
+    cout << "\tNext number: \n" << endl;
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new seed = " << object.returnNextNumber() << "\n" << endl;
+
+ //Project 12
+
+
+    vector<double> storeArray; // vector to store the element while looping 1 million times
+    for (int i = 0; i < 1000000; i++)
+    {
+        //cout << "Div num: #" << i + 1 << " = " << object.returnDividedNextNumber() << endl;
+        storeArray.push_back(static_cast<double>(object.returnDividedNextNumber()));
+    }
+    sort(storeArray.begin(), storeArray.end());
+
+    cout << "\t\tRange           Number of Occurrences" << endl;
+	cout << "\t\t[0.0 ... 0.1)   " << countElementsWithinRange(0.0, 0.1, storeArray) << endl;
+	cout << "\t\t[0.1 ... 0.2)   " << countElementsWithinRange(0.1, 0.2, storeArray) << endl;
+	cout << "\t\t[0.2 ... 0.3)   " << countElementsWithinRange(0.2, 0.3, storeArray) << endl;
+	cout << "\t\t[0.3 ... 0.4)   " << countElementsWithinRange(0.3, 0.4, storeArray) << endl;
+	cout << "\t\t[0.4 ... 0.5)   " << countElementsWithinRange(0.4, 0.5, storeArray) << endl;
+	cout << "\t\t[0.5 ... 0.6)   " << countElementsWithinRange(0.5, 0.6, storeArray) << endl;
+	cout << "\t\t[0.6 ... 0.7)   " << countElementsWithinRange(0.6, 0.7, storeArray) << endl;
+	cout << "\t\t[0.7 ... 0.8)   " << countElementsWithinRange(0.7, 0.8, storeArray) << endl;
+	cout << "\t\t[0.8 ... 0.9)   " << countElementsWithinRange(0.8, 0.9, storeArray) << endl;
+	cout << "\t\t[0.9 ... 1.0)   " << countElementsWithinRange(0.9, 1.0, storeArray) << endl;
 }
