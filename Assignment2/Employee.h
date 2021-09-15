@@ -40,6 +40,7 @@ public:
 	void setLastName(std::string name);
 	void setFirstName(std::string name);
 	void setEmployeeNumber(std::string iD);
+	void resetEmployeeCount();
 
 	bool setStartDate(std::string date);
 	bool setEndDate(std::string date);

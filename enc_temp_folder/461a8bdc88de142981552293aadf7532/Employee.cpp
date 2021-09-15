@@ -181,7 +181,7 @@ void Employee::setFirstName(std::string name)
 // Postcondition: resets objectCount to 1
 void Employee::resetEmployeeCount()
 {
-	objectCount = 0;
+	objectCount = 1;
 }
 
 // Precondition: date must be in format mm/dd/yyyy

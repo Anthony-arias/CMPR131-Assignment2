@@ -135,7 +135,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
                 break;
             }
 
-            cout << "Only A - Active, I-Inactive, or U-Unknown allowed. try again." << endl;
+            cout << "\t\tERROR: Only A-Active, I-Inactive, or U-Unknown allowed. try again." << endl;
         }
     }
 
@@ -155,7 +155,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
             startDate = inputString("\n\t\t\tEnter the start date: ", false);
             if (!dateValidation(startDate))
             {
-                std::cout << "\n\t\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
+                std::cout << "\n\t\t\tERROR: Invalid date input. Must be a mm/dd/yyyy.\n";
                 continue;
             }
 
@@ -169,7 +169,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
         while (true)
         {
             endDate = inputString("\n\t\t\tEnter the new ending date: ", false);
-            if (!dateValidation(endDate))
+            if (!dateValidation(endDate) && (endDate != "Current" || endDate != "current"))
             {
                 std::cout << "\n\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
                 continue;
