@@ -53,10 +53,16 @@ void displayOptionOneSubMenuOne(void)
 //PostCondition: displays option one sub menu options
 void displayOptionOneSubMenuTwo(Employee thisEmployee)
 {
+    char status = thisEmployee.getStatus();
+    string statusOutput = "";
+
+    if (thisEmployee.getStatus() == 'A') statusOutput = string(1, status) + "(active)";
+    if (thisEmployee.getStatus() == 'I') statusOutput = string(1, status) + "(inactive)";
+    if (thisEmployee.getStatus() == 'U') statusOutput = string(1, status) + "(unknown)";
 
     cout << "\n\t\tUpdate Employee ID: 1 Record Information" << endl;
     cout << "\t\t" + string(85, char(205)) << endl;
-    cout << "\t\t\tA> Current status       : " << thisEmployee.getStatus() << endl;
+    cout << "\t\t\tA> Current status       : " << statusOutput << endl;
     cout << "\t\t\tB> Current last name    : " << thisEmployee.getLastName() << endl;
     cout << "\t\t\tC> Current first name   : " << thisEmployee.getFirstName() << endl;
     cout << "\t\t\tD> Current Starting date: " << thisEmployee.getStartDate() << endl;
