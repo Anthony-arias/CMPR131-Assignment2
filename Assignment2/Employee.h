@@ -19,28 +19,21 @@ private:
 	std::string startDate;
 	std::string endDate;
 
-	bool isTemporary; // used for new constructor to check if object is made is temporary or not
-
-	void setEmployeeNumber();
+	bool isTemporary = false; // used for new constructor to check if object is made is temporary or not
 
 	bool isLeap(int year);
 	bool dateValidation(std::string date);
 
-	static int objectCount;
-
 public:
 
 	Employee();
-	Employee(std::string sts, std::string id, std::string lstNme, std::string frstNme, std::string strtDte, std::string endDte);
-	Employee(std::string lstNme, std::string frstName, std::string strtDate);
-	Employee(bool isTemp);
-	~Employee();
+	Employee(std::string sts, std::string employeeNumber, std::string lstNme, std::string frstNme, std::string strtDte, std::string endDte);
+	Employee(std::string lstNme, std::string frstName, std::string strtDate, std::string employeeNumber);
 
 	void setStatus(std::string sts);
 	void setLastName(std::string name);
 	void setFirstName(std::string name);
 	void setEmployeeNumber(std::string iD);
-	void resetEmployeeCount();
 
 	bool setStartDate(std::string date);
 	bool setEndDate(std::string date);
@@ -53,11 +46,6 @@ public:
 	std::string getFirstName();
 	std::string getStartDate();
 	std::string getEndDate();
-
-	int getObjectCount() const;
-
-	//std::ostream& operator<<(const Employee& obj);
-	//friend std::ostream& operator<< (std::ostream& out, Employee const& obj);
 };
 
 #endif
