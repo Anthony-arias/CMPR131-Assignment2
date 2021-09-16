@@ -39,14 +39,14 @@ void displayOptionOneMenu(void)
 //PostCondition: displays option one sub menu options
 void displayOptionOneSubMenuOne(void)
 {
-    cout << "\n\t\tDisplay Employee Record Information" << endl;
-    cout << "\t\t" + string(85, char(205)) << endl;
-    cout << "\t\t\tA> All records" << endl;
-    cout << "\t\t\tB> Active records" << endl;
-    cout << "\t\t\tC> Inactive records" << endl;
-    cout << "\t\t" + string(85, char(196)) << endl;
-    cout << "\t\t\t0> return" << endl;
-    cout << "\t\t" + string(85, char(205)) << endl;
+    cout << "\n\tB> Display Employee Record Information" << endl;
+    cout << "\t" + string(85, char(205)) << endl;
+    cout << "\t\tA> All records" << endl;
+    cout << "\t\tB> Active records" << endl;
+    cout << "\t\tC> Inactive records" << endl;
+    cout << "\t" + string(85, char(196)) << endl;
+    cout << "\t\t0> return" << endl;
+    cout << "\t" + string(85, char(205)) << endl;
 }
 
 //PreCondition: NA
@@ -60,15 +60,15 @@ void displayOptionOneSubMenuTwo(Employee thisEmployee)
     if (thisEmployee.getStatus() == 'I') statusOutput = string(1, status) + "(inactive)";
     if (thisEmployee.getStatus() == 'U') statusOutput = string(1, status) + "(unknown)";
 
-    cout << "\n\t\tUpdate Employee ID: 1 Record Information" << endl;
+    cout << "\n\tC> Update Employee ID: 1 Record Information" << endl;
     cout << "\t\t" + string(85, char(205)) << endl;
-    cout << "\t\t\tA> Current status       : " << statusOutput << endl;
-    cout << "\t\t\tB> Current last name    : " << thisEmployee.getLastName() << endl;
-    cout << "\t\t\tC> Current first name   : " << thisEmployee.getFirstName() << endl;
-    cout << "\t\t\tD> Current Starting date: " << thisEmployee.getStartDate() << endl;
-    cout << "\t\t\tE> Current Ending date  : " << thisEmployee.getEndDate() << endl;
-    cout << "\t\t" + string(85, char(196)) << endl;
-    cout << "\t\t\t1> Commit the change(s) and return" << endl;
-    cout << "\t\t\t0> Uncommit the change(s) and return" << endl;
-    cout << "\t\t" + string(85, char(205)) << endl;
+    cout << "\t\tA> Current status       : " << statusOutput << endl;
+    cout << "\t\tB> Current last name    : " << thisEmployee.getLastName() << endl;
+    cout << "\t\tC> Current first name   : " << thisEmployee.getFirstName() << endl;
+    cout << "\t\tD> Current Starting date: " << thisEmployee.getStartDate() << endl;
+    cout << "\t\tE> Current Ending date  : " << thisEmployee.getEndDate() << endl;
+    cout << "\t" + string(85, char(196)) << endl;
+    cout << "\t\t1> Commit the change(s) and return" << endl;
+    cout << "\t\t0> Uncommit the change(s) and return" << endl;
+    cout << "\t" + string(85, char(205)) << endl;
 }

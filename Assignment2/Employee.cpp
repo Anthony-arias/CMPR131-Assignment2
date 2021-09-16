@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-	// Default constructor
+// Default constructor
 Employee::Employee()
 {
 	setStatus("A");
@@ -112,7 +112,7 @@ bool Employee::isLeap(int year)
 // Postcondition: returns true if the date is entered in correct format, flase if it is not
 bool Employee::dateValidation(std::string date)
 {
-	if (date.length() < 10)
+	if (date.length() < 10 || date.length() > 10)
 		return false;
 
 	if (date[2] != '/' || date[5] != '/')
@@ -175,6 +175,13 @@ void Employee::setLastName(std::string name)
 void Employee::setFirstName(std::string name)
 {
 	firstName = name;
+}
+
+// Precondition: none
+// Postcondition: resets objectCount to 1
+void Employee::resetEmployeeCount()
+{
+	objectCount = 0;
 }
 
 // Precondition: date must be in format mm/dd/yyyy
