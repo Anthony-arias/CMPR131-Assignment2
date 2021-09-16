@@ -155,6 +155,8 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
     } while (true);
 }
 
+//PreCondition: NA
+//PostCondition: generate a sequence of pseudorandom integers
 void programTwo(void)
 {
     clearScreen();
