@@ -1,5 +1,9 @@
 // main.cpp
 
+// Team: Anthony, An, Van, Vincent, Nhan
+// Chapter 2: Abstract Data Types and C++ CLasses
+// 09/16/2021
+
 #include "menus.h"
 #include "input.h"
 #include "optionOne.h"
@@ -40,7 +44,8 @@ void mainMenu(void)
         case 0: clearScreen(); return;
         case 1: clearScreen(); programOne(employees); break;
         case 2: clearScreen(); programTwo(); break;
-        default: cout << "\tERROR-3A: Invalid input. Must be from 0..2." << endl << endl; break;
+        default: cout << "\t\tERROR-3A: Invalid input. Must be from 0..2." << endl;
+            pause("\n\t\tPress enter to continue...");
         }
 
     } while (true);
@@ -60,11 +65,12 @@ void programOne(std::vector<Employee> employees)
         {
         case '0': return;
         case 'a': case 'A': readData(employees); pause("\n\t\tPress enter to continue..."); break;
-        case 'b': case 'B': insertEmployee(employees); pause("\n\tPress enter to continue...");  break;
+        case 'b': case 'B': insertEmployee(employees); pause("\n\t\tPress enter to continue...");  break;
         case 'c': case 'C': programOneSubProgramTwo(employees); break;
         case 'd': case 'D': programOneSubProgramOne(employees); break;
-        case 'e': case 'E': writeData(employees); pause("\n\tPress enter to continue..."); break;
+        case 'e': case 'E': writeData(employees); pause("\n\t\tPress enter to continue..."); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
+            pause("\n\t\tPress enter to continue...");
         }
 
     } while (true);
@@ -84,7 +90,7 @@ void programOneSubProgramOne(std::vector<Employee> employees)
         clearScreen();
         displayOptionOneSubMenuOne();
 
-        int option = inputChar("\t\t\tOption: ");
+        int option = inputChar("\t\tOption: ");
 
         switch (option)
         {
@@ -93,10 +99,11 @@ void programOneSubProgramOne(std::vector<Employee> employees)
         case 'b': case 'B': displayRecords(employees, 'A'); pause("\n\t\tPress enter to continue..."); break;
         case 'c': case 'C': displayRecords(employees, 'I'); pause("\n\t\tPress enter to continue..."); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
-            displayOptionOneMenu(); continue;
+            pause("\n\t\tPress enter to continue...");
         }
 
-        break; 
+        // Whats this break for?
+        //break; 
 
     } while (true);
 }
@@ -141,7 +148,7 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
         case 'd': case 'D': updateRecord(temp, "start"); break;
         case 'e': case 'E': updateRecord(temp, "end"); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D', or 'E" << endl;
-            displayOptionOneMenu(); continue;
+            pause("\n\t\tPress enter to continue...");
         }
     } while (true);
 }
