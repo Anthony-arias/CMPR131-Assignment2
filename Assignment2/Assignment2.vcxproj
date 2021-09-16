@@ -147,6 +147,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="optionOne.h" />
+    <ClInclude Include="optionTwo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

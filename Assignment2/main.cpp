@@ -8,8 +8,8 @@
 #include "input.h"
 #include "optionOne.h"
 #include "Employee.h"
-
-#include<cctype>
+#include "optionTwo.h"
+#include <cctype>
 
 void mainMenu(void);
 void programOne(std::vector<Employee> employees);
@@ -31,18 +31,16 @@ void mainMenu(void)
 
     do
     {
-
         clearScreen();
 
         displayMainMenu();
-
 
         int userInput = inputInteger("\t\tOption: ");
         switch (userInput)
         {
         case 0: clearScreen(); return;
         case 1: clearScreen(); programOne(employees); break;
-        case 2: clearScreen(); programTwo(); break;
+        case 2: clearScreen(); programTwo(); pause("\n\t\tPress enter to continue..."); break;
         default: cout << "\t\tERROR-3A: Invalid input. Must be from 0..2." << endl;
             pause("\n\t\tPress enter to continue...");
         }
@@ -52,6 +50,8 @@ void mainMenu(void)
     } while (true);
 }
 
+//PreCondition: input is an Employee vector
+//PostCondition: lets user choose actions found in program one
 void programOne(std::vector<Employee> employees)
 {
     
@@ -77,6 +77,8 @@ void programOne(std::vector<Employee> employees)
     } while (true);
 }
 
+//PreCondition: input is an Employee vector
+//PostCondition: lets user choose actions found in sub program one
 void programOneSubProgramOne(std::vector<Employee> employees)
 {
 
@@ -103,12 +105,11 @@ void programOneSubProgramOne(std::vector<Employee> employees)
             pause("\n\t\tPress enter to continue...");
         }
 
-        // Whats this break for?
-        //break; 
-
     } while (true);
 }
 
+//PreCondition: input is an Employee vector
+//PostCondition: lets user choose actions found in sub program two
 void programOneSubProgramTwo(std::vector<Employee> employees)
 {
     if (employees.size() == 0)
@@ -156,5 +157,85 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
 
 void programTwo(void)
 {
-    // stuff here
+    clearScreen();
+    cout << "2> Pseudorandom Project" << endl;
+    cout << string(100, char(196)) << endl;
+    srand(time(0));
+    int seed = rand() % 9999;
+    int multiplier = rand() % 9999;
+    int increment = rand() % 9999;
+    int modulus = rand() % 9999;
+
+    //Project 11
+
+    Pseudorandom object(seed, multiplier, increment, modulus);
+    cout << "\ttest1 (pseudorandom): \n" << endl;
+    cout << "\t\tSeed " << object.getSeed() << endl;
+    cout << "\n\t\tGenerated random " << object.getModulus() << " different numbers.\n\n";
+    cout << "\tFirst number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new seed = " << object.returnNextNumber() << "\n\n";
+    //next number
+    cout << "\tNext number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new seed = " << object.returnNextNumber() << "\n\n";
+    //next number
+    cout << "\tNext number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new seed = " << object.returnNextNumber() << "\n\n";
+
+    //Project 12
+
+    cout << "\tFirst divided number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new divided number = " << object.returnDividedNextNumber() << "\n\n";
+    //next number
+    cout << "\tNext divided number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new divided number = " << object.returnDividedNextNumber() << "\n\n";
+    //next number
+    cout << "\tNext divided number: \n\n";
+    cout << "\t\tmultiplier = " << object.getMultiplier() <<
+        ", increment = " << object.getIncrement() << ", modulus = " << object.getModulus() <<
+        ", and the new divided number = " << object.returnDividedNextNumber() << "\n\n";
+
+    //Project 13
+    vector<double> storeArray; // vector to store the element while looping 1 million times
+    for (int i = 0; i < 1000000; i++)
+    {
+        //cout << "Div num: #" << i + 1 << " = " << object.returnDividedNextNumber() << endl;
+        storeArray.push_back(static_cast<double>(object.returnDividedNextNumber()));
+    }
+    sort(storeArray.begin(), storeArray.end());
+
+    cout << "\t\tRange           Number of Occurrences\n" << endl;
+    cout << "\t\t[0.0 ... 0.1)   " << countElementsWithinRange(0.0, 0.1, storeArray);
+    cout << "\n\t\t[0.1 ... 0.2)   " << countElementsWithinRange(0.1, 0.2, storeArray);
+    cout << "\n\t\t[0.2 ... 0.3)   " << countElementsWithinRange(0.2, 0.3, storeArray);
+    cout << "\n\t\t[0.3 ... 0.4)   " << countElementsWithinRange(0.3, 0.4, storeArray);
+    cout << "\n\t\t[0.4 ... 0.5)   " << countElementsWithinRange(0.4, 0.5, storeArray);
+    cout << "\n\t\t[0.5 ... 0.6)   " << countElementsWithinRange(0.5, 0.6, storeArray);
+    cout << "\n\t\t[0.6 ... 0.7)   " << countElementsWithinRange(0.6, 0.7, storeArray);
+    cout << "\n\t\t[0.7 ... 0.8)   " << countElementsWithinRange(0.7, 0.8, storeArray);
+    cout << "\n\t\t[0.8 ... 0.9)   " << countElementsWithinRange(0.8, 0.9, storeArray);
+    cout << "\n\t\t[0.9 ... 1.0)   " << countElementsWithinRange(0.9, 1.0, storeArray);
+
+    cout << "\n\n\t\tA pseudorandom number generator with this equal-interval behavior is called uniformly distributed.";
+    cout << "\n\t\tWith good choices of the constants, you will end up with about 10 % of the numbers in each interval.\n\n";
+    cout << "\t\tRange           Percentage (%)";
+    cout << "\n\t\t[0.0 ... 0.1)   " << checkUniformlyDistributed(countElementsWithinRange(0.0, 0.1, storeArray));
+    cout << "\n\t\t[0.1 ... 0.2)   " << checkUniformlyDistributed(countElementsWithinRange(0.1, 0.2, storeArray));
+    cout << "\n\t\t[0.2 ... 0.3)   " << checkUniformlyDistributed(countElementsWithinRange(0.2, 0.3, storeArray));
+    cout << "\n\t\t[0.3 ... 0.4)   " << checkUniformlyDistributed(countElementsWithinRange(0.3, 0.4, storeArray));
+    cout << "\n\t\t[0.4 ... 0.5)   " << checkUniformlyDistributed(countElementsWithinRange(0.4, 0.5, storeArray));
+    cout << "\n\t\t[0.5 ... 0.6)   " << checkUniformlyDistributed(countElementsWithinRange(0.5, 0.6, storeArray));
+    cout << "\n\t\t[0.6 ... 0.7)   " << checkUniformlyDistributed(countElementsWithinRange(0.6, 0.7, storeArray));
+    cout << "\n\t\t[0.7 ... 0.8)   " << checkUniformlyDistributed(countElementsWithinRange(0.7, 0.8, storeArray));
+    cout << "\n\t\t[0.8 ... 0.9)   " << checkUniformlyDistributed(countElementsWithinRange(0.8, 0.9, storeArray));
+    cout << "\n\t\t[0.9 ... 1.0)   " << checkUniformlyDistributed(countElementsWithinRange(0.9, 1.0, storeArray)) << "\n";
 }
