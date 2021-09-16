@@ -248,7 +248,7 @@ void insertEmployee(std::vector<Employee>& obj)
         break;
     }
 
-    Employee temp(lastName, firstName, startDate);
+    Employee temp(lastName, firstName, startDate, std::to_string(obj.size() + 1));
     obj.push_back(temp);
 
 }

@@ -21,70 +21,37 @@
 Employee::Employee()
 {
 	setStatus("A");
-	setEmployeeNumber();
 	setLastName("Unknown");
 	setFirstName("Unknown");
 	setStartDate("01/02/1900"); // Default start date to start of company date.
 	setEndDate(true);
-
-	objectCount++;
 }
 
 // Constructor with Args
-Employee::Employee(std::string sts, std::string id, std::string lstNme, std::string frstNme, std::string strtDte, std::string endDte)
+Employee::Employee(std::string sts, std::string employeeNumber, std::string lstNme, std::string frstNme, std::string strtDte, std::string endDte)
 {
 	setStatus(sts);
-	setEmployeeNumber(id);
+	setEmployeeNumber(employeeNumber);
 	setLastName(lstNme);
 	setFirstName(frstNme);
 	setStartDate(strtDte); // Default start date to start of company date.
 	setEndDate(endDte);
 
-	objectCount++;
 }
 
-Employee::Employee(std::string lstNme, std::string frstName, std::string strtDate)
+Employee::Employee(std::string lstNme, std::string frstName, std::string strtDate, std::string employeeNumber)
 {
 	setStatus("A");
-	setEmployeeNumber();
+	setEmployeeNumber(employeeNumber);
 	setLastName(lstNme);
 	setFirstName(frstName);
 	setStartDate(strtDate);
 	setEndDate(true);
-
-	objectCount++;
 }
 
-// Precondition: isTemp can be either true or false
-// Postcondition: creates an object but does not add to objectCount within Employee class
-Employee::Employee(bool isTemp)
-{
-	isTemporary = true;
-
-	setStatus("A");
-	setLastName("Unknown");
-	setFirstName("Unknown");
-	setStartDate("01/02/1900"); // Default start date to start of company date.
-	setEndDate(true);
-}
-
-Employee::~Employee()
-{
-	if (isTemporary)
-		return;
-
-	objectCount--;
-}
 
 // Private Functions =========================================================
 // 
-// Precondition: NA
-// Postcondition: employeeNumber is set to the number of instances of Employee objects made
-void Employee::setEmployeeNumber()
-{
-	employeeNumber = std::to_string(getObjectCount());
-}
-
 // Precondition: String cannot be empty
 // Postcondition: employeeNumber is set to iD
 void Employee::setEmployeeNumber(std::string iD)
@@ -156,10 +123,10 @@ bool Employee::dateValidation(std::string date)
 // Postcondition: status is set to sts
 void Employee::setStatus(std::string sts)
 {
-	/*if (std::tolower(sts[0]) == 'u' || std::tolower(sts[0]) == 'i' || std::tolower(sts[0] == 'a'))
+	if (std::tolower(sts[0]) == 'u' || std::tolower(sts[0]) == 'i' || std::tolower(sts[0] == 'a'))
 		status = toupper(sts[0]);
 	else
-		status = 'U';*/                                                                              //commented this out to test displayAllActiveRecords();
+		status = 'U';                                                                             
 	status = sts[0];
 }
 
@@ -175,13 +142,6 @@ void Employee::setLastName(std::string name)
 void Employee::setFirstName(std::string name)
 {
 	firstName = name;
-}
-
-// Precondition: none
-// Postcondition: resets objectCount to 1
-void Employee::resetEmployeeCount()
-{
-	objectCount = 0;
 }
 
 // Precondition: date must be in format mm/dd/yyyy
@@ -269,13 +229,3 @@ std::string Employee::getEndDate()
 {
 	return endDate;
 }
-
-// Precondition: NA
-// Postcondition: Returns the number of objects that have been created
-int Employee::getObjectCount() const
-{
-	return objectCount;
-}
-
-
-int Employee::objectCount = 1;

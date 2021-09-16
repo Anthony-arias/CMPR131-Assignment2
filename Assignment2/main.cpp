@@ -23,16 +23,15 @@ int main(void)
 //PostCondition: redirects user to different menus based on their choice
 void mainMenu(void)
 {
-
+    std::vector<Employee> employees;
 
     do
     {
-        std::vector<Employee> employees;
-        employees.clear();
 
         clearScreen();
 
         displayMainMenu();
+
 
         int userInput = inputInteger("\t\tOption: ");
         switch (userInput)
@@ -42,6 +41,8 @@ void mainMenu(void)
         case 2: clearScreen(); programTwo(); break;
         default: cout << "\tERROR-3A: Invalid input. Must be from 0..2." << endl << endl; break;
         }
+
+        employees.clear();
 
     } while (true);
 }
