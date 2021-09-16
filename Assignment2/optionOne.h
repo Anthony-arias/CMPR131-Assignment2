@@ -14,8 +14,6 @@
 
 // Function Prototypes
 
-// this prototype will throw error
-//void displayRecords(std::vector<Employee> obj, char option = NULL);
 void readData(std::vector<Employee>& obj);
 void writeData(std::vector<Employee> obj);
 void insertEmployee(std::vector<Employee>& obj);
@@ -24,8 +22,8 @@ void updateRecord(Employee& thisEmployee, std::string option);
 bool dateValidation(std::string date);
 bool isLeap(int year);
 
-// Function Definitions
-
+//PreCondition: input is a reference to Employee vector
+//PostCondition: reads data from file and inputs data into vector
 void readData(std::vector<Employee>& obj)
 {
     std::vector<vector<string>> fileData;
@@ -99,6 +97,8 @@ void readData(std::vector<Employee>& obj)
     }
 }
 
+//PreCondition: input is an Employee vector
+//PostCondition: writes data form vector to a file
 void writeData(std::vector<Employee> obj)
 {
     if (obj.size() == 0)
@@ -121,6 +121,8 @@ void writeData(std::vector<Employee> obj)
 
 }
 
+//PreCondition: input is a reference to Employee vector, input is type string
+//PostCondition: updates employee record in vector based string input
 void updateRecord(Employee& thisEmployee, std::string option)
 {
     if (option == "status")
@@ -181,6 +183,8 @@ void updateRecord(Employee& thisEmployee, std::string option)
     }
 }
 
+//PreCondition: input is an Employee vector, input is type char
+//PostCondition: displays inactive, active, or all employee records found in vector
 void displayRecords(std::vector<Employee> obj, char option = NULL)
 {
     if (obj.size() == 0)
@@ -228,6 +232,8 @@ void displayRecords(std::vector<Employee> obj, char option = NULL)
     }
 }
 
+//PreCondition: input is a reference to Employee vector
+//PostCondition: inserts new employee record in vector
 void insertEmployee(std::vector<Employee>& obj)
 {
     clearScreen();
@@ -241,7 +247,7 @@ void insertEmployee(std::vector<Employee>& obj)
         startDate = inputString("\t\tEnter the start date: ", false);
         if (!dateValidation(startDate))
         {
-            std::cout << "\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
+            std::cout << "\t\tERROR: Invalid date input. Must be a mm/dd/yyyy.\n";
             continue;
         }
 
@@ -253,6 +259,8 @@ void insertEmployee(std::vector<Employee>& obj)
 
 }
 
+//PreCondition: input is type string
+//PostCondition: returns bool. true if string is valid date, false if it's not valid date
 bool dateValidation(std::string date)
 {
     if (date.length() < 10 || date.length() > 10)
@@ -293,6 +301,8 @@ bool dateValidation(std::string date)
     return true;
 }
 
+//PreCondition: input is type int
+//PostCondition: returns bool. true if int is leap year, false if it's not leap year
 bool isLeap(int year)
 {
     if (year < 1)
