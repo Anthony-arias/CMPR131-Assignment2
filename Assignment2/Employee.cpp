@@ -1,16 +1,4 @@
 // Employee.cpp
-// September 9, 2021
-// Currently getting error:
-//	- Error	LNK2001	unresolved external symbol "private: static int ObjectCount::count" (? count@ObjectCount@@0HA)	Assignment2	C : \Users\Vince\OneDrive\CLASS WORK AND HOMEWORK\CMPR131\Module 2\Assignment2\Employee.obj	1
-//	- it appears to be an issue with ObjectCount but I can't quite figure it out as of now
-//
-// September 10, 2021
-//	- ISsues with objectCount ~ due to us using temporary objects sometimes for our functions after the destructor is met it subtracts one from ObjectCount
-//		and so if we add a new employee we are not getting the corrent number.
-//	- Bugs:
-//		- found a bug with the menu when displaying all records. If you enter 1 the main menu is displayed but if a-c is entered it goes into that
-//			choice as if it were in the correct menu.
-
 
 #include "Employee.h"
 #include "ctype.h"

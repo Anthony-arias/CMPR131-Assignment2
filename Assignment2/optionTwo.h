@@ -10,6 +10,7 @@ using namespace std;
 // Functions Prototype
 void displayArrayElements(vector<int> v);
 int countElementsWithinRange(double begin, double end, vector<double> v);
+double checkUniformDistributed(int count);
 
 // Class
 class Pseudorandom

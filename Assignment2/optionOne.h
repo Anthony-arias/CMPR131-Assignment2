@@ -120,6 +120,7 @@ void writeData(std::vector<Employee> obj)
     }
     else std::cout << "\n\t\tError: File could not be opened" << std::endl;
 
+    std::cout << "\n\t\tfile " << fileName << " has been written" << std::endl;
 }
 
 //PreCondition: input is a reference to Employee vector, input is type string
