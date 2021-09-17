@@ -1,6 +1,6 @@
 // main.cpp
 
-// Team: Anthony, An, Van, Vincent, Nhan
+// Team: Vincent, An, Van, Anthony, Nhan
 // Chapter 2: Abstract Data Types and C++ CLasses
 // 09/16/2021
 

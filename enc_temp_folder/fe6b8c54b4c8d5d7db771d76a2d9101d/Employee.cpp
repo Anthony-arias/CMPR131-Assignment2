@@ -68,58 +68,58 @@ bool Employee::isLeap(int year)
 // Postcondition: returns true if the date is entered in correct format, flase if it is not
 bool Employee::dateValidation(std::string date)
 {
-	if (date.length() < 10 || date.length() > 10)
-		return false;
+		if (date.length() < 10 || date.length() > 10)
+			return false;
 
-	if (date[2] != '/' || date[5] != '/')
-		return false;
+		if (date[2] != '/' || date[5] != '/')
+			return false;
 
-	char* dateArray = new char[date.size()];
-	for (int index = 0; index < date.size(); index++)
-	{
-		dateArray[index] = date.at(index);
-		if (!isdigit(dateArray[index]))
+		char* dateArray = new char[date.size()];
+		for (int index = 0; index < date.size(); index++)
 		{
+			dateArray[index] = date.at(index);
+			if (!isdigit(dateArray[index]))
+			{
+				delete[]dateArray;
+				return false;
+			}
+		}
+
+		std::string month = date.substr(0, 2);
+		std::string day = date.substr(3, 2);
+		std::string year = date.substr(6, 9);
+
+		int monthInt = std::stoi(month);
+		int dayInt = std::stoi(day);
+		int yearInt = std::stoi(year);
+
+		if (monthInt < 1 || monthInt > 12)
+		{
+			std::cout << "ERROR: Month out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
 			delete[]dateArray;
 			return false;
 		}
-	}
+		if ((dayInt < 1) || (isLeap(yearInt) && dayInt > 29))
+		{
+			std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+			delete[]dateArray;
+			return false;
+		}
+		if (!isLeap(yearInt) && dayInt > 28)
+		{
+			std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+			delete[]dateArray;
+			return false;
+		}
+		if (yearInt < 1900 || yearInt > 2021) // 1900 can be changed to whatever we would like. Placeholder for now.
+		{
+			std::cout << "ERROR: Year out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+			delete[]dateArray;
+			return false;
+		}
 
-	std::string month = date.substr(0, 2);
-	std::string day = date.substr(3, 2);
-	std::string year = date.substr(6, 9);
-
-	int monthInt = std::stoi(month);
-	int dayInt = std::stoi(day);
-	int yearInt = std::stoi(year);
-
-	if (monthInt < 1 || monthInt > 12)
-	{
-		std::cout << "ERROR: Month out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
 		delete[]dateArray;
-		return false;
-	}
-	if ((dayInt < 1) || (isLeap(yearInt) && dayInt > 29))
-	{
-		std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
-		delete[]dateArray;
-		return false;
-	}
-	if (!isLeap(yearInt) && dayInt > 28)
-	{
-		std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
-		delete[]dateArray;
-		return false;
-	}
-	if (yearInt < 1900 || yearInt > 2021) // 1900 can be changed to whatever we would like. Placeholder for now.
-	{
-		std::cout << "ERROR: Year out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
-		delete[]dateArray;
-		return false;
-	}
-
-	delete[]dateArray;
-	return true;
+		return true;
 	
 }
 
