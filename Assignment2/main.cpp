@@ -15,7 +15,7 @@ void mainMenu(void);
 void programOne(std::vector<Employee> employees);
 void programTwo(void);
 void programOneSubProgramOne(std::vector<Employee> employees);
-void programOneSubProgramTwo(std::vector<Employee> employees);
+void programOneSubProgramTwo(std::vector<Employee> &employees);
 
 int main(void)
 {
@@ -110,7 +110,7 @@ void programOneSubProgramOne(std::vector<Employee> employees)
 
 //PreCondition: input is an Employee vector
 //PostCondition: lets user choose actions found in sub program two
-void programOneSubProgramTwo(std::vector<Employee> employees)
+void programOneSubProgramTwo(std::vector<Employee> &employees)
 {
     if (employees.size() == 0)
     {
