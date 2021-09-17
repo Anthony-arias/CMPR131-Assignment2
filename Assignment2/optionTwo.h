@@ -8,7 +8,6 @@
 
 using namespace std;
 // Functions Prototype
-void displayArrayElements(vector<int> v);
 int countElementsWithinRange(double begin, double end, vector<double> v);
 double checkUniformDistributed(int count);
 
@@ -82,22 +81,6 @@ public:
 };
 
 // Additional functions
-
-// Precondition: valid vector that has integer type
-// Postcondition: show the elements in the vector
-void displayArrayElements(vector<int> v)
-{
-	for (int i = 0; i < v.size(); i++)
-	{
-		if (i % 20 == 0)
-			cout << "\n";
-		if (i != v[v.size() - 1])
-			cout << v[i] << ", ";
-		else
-			cout << v[i] << " ";
-
-	}
-}
 
 // Precondition: valid initial range and end range, valid vector that has double type
 // Postcondition: count the elements that appear within range
