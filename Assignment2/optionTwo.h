@@ -115,7 +115,7 @@ int countElementsWithinRange(double begin, double end, vector<double> v)
 
 // Precondition: the occurances of number in each interval
 // Postcondition: return the percentage of number in each interval
-int checkUniformlyDistributed(int count)
+double checkUniformlyDistributed(int count)
 {
 	return static_cast<double>((static_cast<double>(count) / 1000000.0) * 100.0);
 }

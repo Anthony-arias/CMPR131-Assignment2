@@ -93,7 +93,7 @@ void programOneSubProgramOne(std::vector<Employee> employees)
         clearScreen();
         displayOptionOneSubMenuOne();
 
-        int option = inputChar("\t\tOption: ");
+        int option = inputChar("\t\t\tOption: ");
 
         switch (option)
         {
@@ -143,7 +143,7 @@ void programOneSubProgramTwo(std::vector<Employee> employees)
         switch (option)
         {
         case '0': return;
-        case '1': employees[employeeIndex] = temp; programOne(employees); break;
+        case '1': employees[employeeIndex] = temp; return;
         case 'a': case 'A': updateRecord(temp, "status"); break;
         case 'b': case 'B': updateRecord(temp, "last"); break;
         case 'c': case 'C': updateRecord(temp, "first"); break;

@@ -95,6 +95,7 @@ void readData(std::vector<Employee>& obj)
 
         obj.push_back(employee);
     }
+    source.close();
 }
 
 //PreCondition: input is an Employee vector
@@ -173,7 +174,7 @@ void updateRecord(Employee& thisEmployee, std::string option)
             endDate = inputString("\n\t\t\tEnter the new ending date: ", false);
             if (!dateValidation(endDate) && (endDate != "Current" || endDate != "current"))
             {
-                std::cout << "\n\t\tERROR: Invalid date input. Must be a mm/dd/yy.\n";
+                std::cout << "\n\t\t\tERROR: Invalid date input. Must be a mm/dd/yyy.\n";
                 continue;
             }
 
