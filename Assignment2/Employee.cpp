@@ -74,15 +74,19 @@ bool Employee::dateValidation(std::string date)
 		return false;
 
 	char* dateArray = new char[date.size()];
-	for (int index = 0; index < date.size(); index++)
-	{
-		dateArray[index] = date.at(index);
-		if (!isdigit(dateArray[index]))
-		{
-			delete[]dateArray;
-			return false;
-		}
-	}
+    for (int index = 0; index < date.size(); index++)
+    {
+        dateArray[index] = date.at(index);
+
+        if (index == 2 || index == 5)
+            continue;
+
+        if (!isdigit(dateArray[index]))
+        {
+            delete[]dateArray;
+            return false;
+        }
+    }
 
 	std::string month = date.substr(0, 2);
 	std::string day = date.substr(3, 2);
