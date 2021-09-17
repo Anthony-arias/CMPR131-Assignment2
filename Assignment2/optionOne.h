@@ -271,6 +271,17 @@ bool dateValidation(std::string date)
     if (date[2] != '/' || date[5] != '/')
         return false;
 
+    char* dateArray = new char[date.size()];
+    for (int index = 0; index < date.size(); index++)
+    {
+        dateArray[index] = date.at(index);
+        if (!isdigit(dateArray[index]))
+        {
+            delete[]dateArray;
+            return false;
+        }
+    }
+
     std::string month = date.substr(0, 2);
     std::string day = date.substr(3, 2);
     std::string year = date.substr(6, 9);
@@ -282,24 +293,29 @@ bool dateValidation(std::string date)
     if (monthInt < 1 || monthInt > 12)
     {
         std::cout << "ERROR: Month out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+        delete[]dateArray;
         return false;
     }
     if ((dayInt < 1) || (isLeap(yearInt) && dayInt > 29))
     {
         std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+        delete[]dateArray;
         return false;
     }
     if (!isLeap(yearInt) && dayInt > 28)
     {
         std::cout << "ERROR: Day out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+        delete[]dateArray;
         return false;
     }
     if (yearInt < 1900 || yearInt > 2021) // 1900 can be changed to whatever we would like. Placeholder for now.
     {
         std::cout << "ERROR: Year out of bounds. Enter a date in mm/dd/yyyy" << std::endl;
+        delete[]dateArray;
         return false;
     }
 
+    delete[]dateArray;
     return true;
 }
 
