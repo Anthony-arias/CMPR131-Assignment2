@@ -275,6 +275,10 @@ bool dateValidation(std::string date)
     for (int index = 0; index < date.size(); index++)
     {
         dateArray[index] = date.at(index);
+
+        if (index == 2 || index == 5)
+            continue;
+
         if (!isdigit(dateArray[index]))
         {
             delete[]dateArray;
