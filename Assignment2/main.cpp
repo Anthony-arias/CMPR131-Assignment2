@@ -210,7 +210,6 @@ void programTwo(void)
     vector<double> storeArray; // vector to store the element while looping 1 million times
     for (int i = 0; i < 1000000; i++)
     {
-        //cout << "Div num: #" << i + 1 << " = " << object.returnDividedNextNumber() << endl;
         storeArray.push_back(static_cast<double>(object.returnDividedNextNumber()));
     }
     sort(storeArray.begin(), storeArray.end());
